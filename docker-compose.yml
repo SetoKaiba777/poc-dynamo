@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - '4566:4566'
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+      SERVICES: dynamodb
+      AWS_SECRET_KEY_ID: "000"
+      AWS_SECRET_ACCESS_KEY: "000"
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "./_localstack/init/ready.d/aws-init.sh:/etc/localstack/init/ready.d/aws-init.sh"
